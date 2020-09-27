@@ -1,3 +1,10 @@
+/**
+ *
+ * 
+ * @author Aarif Razak ahr58, Julian Lee jl2203
+ *
+ */
+
 public class AccountDatabase {
     
     private Account[] accounts ;
@@ -9,8 +16,18 @@ public class AccountDatabase {
 
     private void grow() {
 
-    }
+        Account[] newAccounts = new Account[accounts.length + 5] ;
 
+        for (int i = 0 ; i < size ; i++) {
+
+            newAccounts[i] = accounts[i] ;
+
+        }
+
+        accounts = newAccounts ;
+
+    }
+    
     public boolean add(Account account) {
 
     }

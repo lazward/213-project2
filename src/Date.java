@@ -1,3 +1,10 @@
+/**
+ *
+ * 
+ * @author Aarif Razak ahr58, Julian Lee jl2203
+ *
+ */
+
 public class Date implements Comparable<Date> {
 
     private int year ; 

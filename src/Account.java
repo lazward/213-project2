@@ -1,3 +1,10 @@
+/**
+ *
+ * 
+ * @author Aarif Razak ahr58, Julian Lee jl2203
+ *
+ */
+
 public abstract class Account {
 
     private Profile holder ;
@@ -6,9 +13,13 @@ public abstract class Account {
 
     public void debit(double amount) {
 
+        balance = balance - amount ;
+
     }
 
     public void credit(double amount) {
+
+        balance = balance + amount ;
 
     }
 
