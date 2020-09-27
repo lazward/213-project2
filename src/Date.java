@@ -49,11 +49,21 @@ public class Date implements Comparable<Date> {
 
     public String toString() {
 
-        
+        return Integer.toString(month) + Integer.toString(day) + Integer.toString(year) ;
 
     }
 
     public boolean isValid() {
+
+        if (month < 1 || month > 12) {
+
+            return false ;
+
+        }
+
+        // Need to check for days of the month (30 vs 31 days, leap year, etc)
+
+        return true ;
 
     }
     
