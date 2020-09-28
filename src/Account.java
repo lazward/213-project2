@@ -11,12 +11,22 @@ public abstract class Account {
     private double balance ;
     private Date dateOpen ;
 
+    /**
+     * Debit the account's balance by a specified amount.
+     * 
+     * @param amount
+     */
     public void debit(double amount) {
 
         balance = balance - amount ;
 
     }
 
+    /**
+     * Credit the account's balance by a specified amount.
+     * 
+     * @param amount
+     */
     public void credit(double amount) {
 
         balance = balance + amount ;

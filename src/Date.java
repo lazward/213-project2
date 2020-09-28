@@ -49,7 +49,7 @@ public class Date implements Comparable<Date> {
 
     public String toString() {
 
-        return Integer.toString(month) + Integer.toString(day) + Integer.toString(year) ;
+        return Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year) ;
 
     }
 
