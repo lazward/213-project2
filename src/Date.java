@@ -7,7 +7,7 @@
 
 public class Date implements Comparable<Date> {
 
-    private int year ; 
+    private int year ;
     private int month ;
     private int day ;
 
@@ -55,7 +55,7 @@ public class Date implements Comparable<Date> {
 
     public boolean isValid() {
 
-        if (month < 1 || month > 12) {
+        if (month < 1 || month > 12 || day < 1 || day > 31) {
 
             return false ;
 
@@ -63,8 +63,43 @@ public class Date implements Comparable<Date> {
 
         // Need to check for days of the month (30 vs 31 days, leap year, etc)
 
-        return true ;
+        if (month == 2) {
+
+            if (day >= 30) {
+
+                return false ;
+
+            }
+
+            if (day == 29) {
+
+                if (year % 4 != 0) { // Every year that is divisible by four is a leap year
+
+                    return false ;
+
+                }
+
+                if (year % 100 == 0 && year % 400 != 0) { // Years that are divisible by 100 are not leap years, but
+                                                          // ones that are divisible by 400 are.
+
+                    return false ;
+
+                }
+
+            }
+
+            return true ;
+
+        }
+
+        if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
+
+            return false ;
+
+        }
+
+        return true;
 
     }
-    
+
 }
