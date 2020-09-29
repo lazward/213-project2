@@ -34,6 +34,13 @@ public abstract class Account {
     }
 
     public String toString() {
+        //Convert all respective objects to their string versions
+        //Wll return *Name of holder* $000.000*Dateopened
+        String res =  "*" +holder.getFirstName() + " " + holder.getLastName() + "* $" + Double.toString(balance)+ "*"+dateOpen.toString();
+
+        return res;
+        
+
 
     }
 
@@ -43,6 +50,19 @@ public abstract class Account {
 
     public abstract double monthlyFee() {
         
+    }
+
+    //Helper methods for accessing Private Variables
+
+    public Profile getHolder(){
+        return this.holder;
+    }
+    public double getBalance(){
+        return this.balance;
+    }
+    public Date getOpenDate(){
+        return this.dateOpen;
+
     }
 
 }
