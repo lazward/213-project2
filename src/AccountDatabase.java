@@ -11,6 +11,15 @@ public class AccountDatabase {
     private int size ;
 
     private int find(Account account) {
+        //Search through dataase and return respective index of account
+        for(int i =0; i< accounts.length -1; i++){
+            if(accounts[i].toString().equals(account.toString())){
+                //compare resulting toStrings
+                return i;
+            }else{
+                return -1;
+            }
+        }
 
     }
 
