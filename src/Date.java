@@ -53,7 +53,11 @@ public class Date implements Comparable<Date> {
 
     }
 
-    public boolean isValid() {
+    /**
+     * 
+     * @return
+     */
+    public boolean isValid() { // Check if these numbers count as magic numbers
 
         if (month < 1 || month > 12 || day < 1 || day > 31) {
 
