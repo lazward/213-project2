@@ -148,6 +148,22 @@ public class AccountDatabase {
 
     private void sortByDateOpen() {
 
+        
+       int temp;
+        for(int i = 0; i < size; i ++){
+            for(int j = i+1; j < size; j++){
+
+                if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1 ){
+                    temp = accounts[i].getOpenDate();
+                    accounts[i]
+                    //
+
+                }
+
+            }
+        }
+
+
     }
 
     private void sortByLastName() {
@@ -172,6 +188,9 @@ public class AccountDatabase {
         }
         
 
+    }
+    public int getSize(){
+        return this.size;
     }
 
 }

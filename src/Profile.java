@@ -16,6 +16,18 @@ public class Profile {
     public String getLastName(){
         return this.lname;
     }
+
+    public void setFirstName(String first) {
+
+        fname = first ;
+
+    }
+
+    public void setLastName(String last) {
+
+        lname = last ;
+
+    }
 }
 
 

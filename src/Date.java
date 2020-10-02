@@ -46,7 +46,8 @@ public class Date implements Comparable<Date> {
         return 0 ;
 
     }
-
+    
+    @Override
     public String toString() {
 
         return Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year) ;
@@ -103,6 +104,14 @@ public class Date implements Comparable<Date> {
         }
 
         return true;
+
+    }
+
+    public void setDate(String[] date) {
+
+        month = Integer.parseInt(date[0]) ;
+        day = Integer.parseInt(date[1]) ;
+        year = Integer.parseInt(date[2]) ;
 
     }
 

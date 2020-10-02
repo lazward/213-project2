@@ -41,13 +41,36 @@ public class TransactionManager {
 
                 case 'O': // open
 
+                Profile profile = new Profile() ; // All of this hasn't been tested yet!
+                profile.setFirstName(split[1]);
+                profile.setLastName(split[2]) ;
+                
+                double bal = Double.parseDouble(split[3]) ;
+
+                String[] d = split[4].split("/") ;
+
+                Date date = new Date() ;
+                date.setDate(d);
+
                     switch(input.charAt(1)) {
 
                         case 'C': // checking account
+                            Checking checking = new Checking() ;
+                            checking.setHolder(profile);
+                            checking.setBalance(bal);
+                            checking.setOpenDate(date);
                             break ;
                         case 'S': // savings account
+                            Savings savings = new Savings() ;
+                            savings.setHolder(profile) ;
+                            savings.setBalance(bal) ;
+                            savings.setOpenDate(date) ;
                             break ;
                         case 'M': // money market account
+                            MoneyMarket moneyMarket = new MoneyMarket() ;
+                            moneyMarket.setHolder(profile) ;
+                            moneyMarket.setBalance(bal) ;
+                            moneyMarket.setOpenDate(date) ;
                             break ;
                         default: // invalid
                             break ;

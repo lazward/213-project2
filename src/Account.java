@@ -33,6 +33,7 @@ public abstract class Account {
 
     }
 
+    @Override
     public String toString() {
         //Convert all respective objects to their string versions
         //Wll return *Name of holder* $000.000*Dateopened
@@ -63,6 +64,19 @@ public abstract class Account {
     public Date getOpenDate(){
         return this.dateOpen;
 
+    }
+
+    //Helper setters 
+    public void setHolder(Profile profile){
+        this.holder = profile;
+    }
+
+    public void setBalance(double bal){
+        this.balance = bal;
+    }
+
+    public void setOpenDate(Date newDate){
+        this.dateOpen = newDate;
     }
 
 }
