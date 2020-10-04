@@ -160,7 +160,7 @@ public class AccountDatabase {
 
         Account temp;
        
-        for(int i = 0; i < size; i ++){
+        for(int i = 0; i < size-1; i ++){
             for(int j = i+1; j < size; j++){
 
                 if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1 ){ //compares i to j
@@ -177,12 +177,25 @@ public class AccountDatabase {
     }
 
     private void sortByLastName() {
+
+        Account temp;
+
+        for(int i =0; i < size - 1; i ++){
+            for(int k = i +1; k < size; k++){
+                if(accounts[i].getHolder().getLastName().compareToIgnoreCase(accounts[k].getHolder().getLastName()) == 1){
+                    temp = accounts[i];
+                    accounts[i] = accounts[k];
+                    accounts[k] = temp;
+                }
+            }
+        }
         
         
 
     }
 
     public void printByDateOpen() {
+        //calculate fees needed
         sortByDateOpen();
 
         for(int i = 0; i < accounts.length; i ++){
@@ -194,6 +207,11 @@ public class AccountDatabase {
     }
 
     public void printByLastName() {
+        sortByLastName();
+
+        for(int i =0; i < accounts.length; i ++){
+            System.out.println(accounts[i].toString()); 
+        }
 
     }
 
@@ -210,5 +228,10 @@ public class AccountDatabase {
     public int getSize(){
         return this.size;
     }
+
+    public Account[] getAccounts(){
+        return this.accounts;
+    }
+
 
 }

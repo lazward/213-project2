@@ -39,7 +39,7 @@ public class TransactionManager {
 
             switch(input.charAt(0)) {
 
-                case 'O': // open
+                case 'O': { // open
 
                 Profile profile = new Profile() ; // All of this hasn't been tested yet!
                 profile.setFirstName(split[1]);
@@ -61,12 +61,8 @@ public class TransactionManager {
                             checking.setOpenDate(date);
                             checking.setDirectDeposit(Boolean.parseBoolean(split[5]));
 
-                            System.out.println("first name: " + checking.getHolder().getFirstName() + " last name: " + checking.getHolder().getLastName()) ;
-                            System.out.println("balance: " + checking.getBalance() ) ;
-                            System.out.println("date: " + checking.getOpenDate().toString());
-                            System.out.println("direct deposit: " + checking.getDirectDeposit());
-
                             database.add(checking) ;
+                            System.out.println("Account opened and added to the database.");
                             break ;
                         case 'S': // savings account
                             Savings savings = new Savings() ;
@@ -76,6 +72,7 @@ public class TransactionManager {
                             savings.setLoyal(Boolean.parseBoolean(split[5]));
 
                             database.add(savings) ;
+                            System.out.println("Account opened and added to the database.");
                             break ;
                         case 'M': // money market account
                             MoneyMarket moneyMarket = new MoneyMarket() ;
@@ -84,7 +81,8 @@ public class TransactionManager {
                             moneyMarket.setOpenDate(date) ;
                             moneyMarket.setWithdrawals(0);
 
-                            database.add(moneyMarket) ;    
+                            database.add(moneyMarket) ;
+                            System.out.println("Account opened and added to the database.");
                             break ;
                         default: // invalid
                             System.out.println("Command '" + split[0] + "' not supported!");
@@ -94,9 +92,11 @@ public class TransactionManager {
 
                     break ;
 
-                case 'C': // close
+                }
 
-                    profile = new Profile() ;
+                case 'C': { // close
+
+                    Profile profile = new Profile() ;
                     profile.setFirstName(split[1]);
                     profile.setLastName(split[2]) ;
 
@@ -130,8 +130,8 @@ public class TransactionManager {
                             }
                             break ;
                         case 'M': // money market account
-                        MoneyMarket moneyMarket = new MoneyMarket() ;
-                        moneyMarket.setHolder(profile);
+                            MoneyMarket moneyMarket = new MoneyMarket() ;
+                            moneyMarket.setHolder(profile);
                         if (database.remove(moneyMarket)) {
 
                             System.out.println("Account closed and removed from the database.");
@@ -150,34 +150,148 @@ public class TransactionManager {
 
                     break ;
 
-                case 'D': // deposit
-                    
+                }
+
+                case 'D': { // deposit
+
+                    Profile profile = new Profile() ;
+                    profile.setFirstName(split[1]);
+                    profile.setLastName(split[2]) ;
+
+                    double deposit = Double.parseDouble(split[3]) ;
+
                     switch(input.charAt(1)) {
 
                         case 'C': // checking account
+                            Checking checking = new Checking() ;
+                            checking.setHolder(profile);
+
+                            if (database.deposit(checking, deposit)) {
+
+                                System.out.println(String.format("%.2f", deposit) + " deposited to account.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+
+                            }
                             break ;
                         case 'S': // savings account
+                            Savings savings = new Savings() ;
+                            savings.setHolder(profile) ;
+
+                            if (database.deposit(savings, deposit)) {
+
+                                System.out.println(String.format("%.2f", deposit) + " deposited to account.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+
+                            }
                             break ;
                         case 'M': // money market account
+                            MoneyMarket moneyMarket = new MoneyMarket() ;
+                            moneyMarket.setHolder(profile) ;
+
+                            if (database.deposit(moneyMarket, deposit)) {
+
+                                System.out.println(String.format("%.2f", deposit) + " deposited to account.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+
+                            }
                             break ;
                         default: // invalid
-                            break ;
+                        System.out.println("Command '" + split[0] + "' not supported!");
+                        break ;
 
                     }
 
                     break ;
 
+                }
+
                 case 'W': // withdraw
+                
+                    Profile profile = new Profile() ;
+                    profile.setFirstName(split[1]);
+                    profile.setLastName(split[2]) ;
+
+                    double withdrawal = Double.parseDouble(split[3]) ;
                     
                     switch(input.charAt(1)) {
 
-                        case 'C': // checking account
+                        case 'C': { // checking account
+                            Checking checking = new Checking() ;
+                            checking.setHolder(profile);
+
+                            int result = database.withdrawal(checking, withdrawal) ;
+
+                            if (result == 0) {
+
+                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn account.");
+
+                            } else if (result == 1) {
+
+                                System.out.println("Insufficient funds.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+                                
+                            }
+
                             break ;
-                        case 'S': // savings account
+                        }
+                        case 'S': { // savings account
+                            Savings savings = new Savings() ;
+                            savings.setHolder(profile) ;
+
+                            int result = database.withdrawal(savings, withdrawal) ;
+
+                            if (result == 0) {
+
+                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn account.");
+
+                            } else if (result == 1) {
+
+                                System.out.println("Insufficient funds.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+                                
+                            }
+
                             break ;
-                        case 'M': // money market account
+                        }
+                        case 'M': { // money market account
+
+                            MoneyMarket moneyMarket = new MoneyMarket() ;
+                            moneyMarket.setHolder(profile) ;
+
+                            int result = database.withdrawal(moneyMarket, withdrawal) ;
+
+                            if (result == 0) {
+
+                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn account.");
+
+                            } else if (result == 1) {
+
+                                System.out.println("Insufficient funds.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+                                
+                            }
                             break ;
+                        }
                         default: // invalid
+                            System.out.println("Command '" + split[0] + "' not supported!");
                             break ;
 
 
@@ -190,12 +304,21 @@ public class TransactionManager {
                     switch(input.charAt(1)) {
 
                         case 'A': // print the list of accounts in the database
+                            database.printAccounts() ;
                             break ;
-                        case 'D': // calculate the monthly interests and fees
+                        case 'D': { // calculate the monthly interests and fees
+                            
+                            database.printByDateOpen() ;
+                            
                             break ;
-                        case 'N': // same with PD but sort by the last names in ascending order
+                        }
+                        case 'N': { // same with PD but sort by the last names in ascending order
+
+                            database.printByLastName() ;
                             break ;
+                        }
                         default:
+                            System.out.println("Command '" + split[0] + "' not supported!");
                             break ;
 
                     }
@@ -209,6 +332,8 @@ public class TransactionManager {
             }
 
         }
+
+        scanner.close() ;
         
     }
     
