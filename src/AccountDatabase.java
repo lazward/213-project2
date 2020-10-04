@@ -10,9 +10,20 @@ public class AccountDatabase {
     private Account[] accounts ;
     private int size ;
 
+    public AccountDatabase() {
+        accounts = new Account[5] ;
+        size = 0 ;
+    }
+
     private int find(Account account) {
         //Search through dataase and return respective index of account
         for(int i =0; i < accounts.length - 1; i++){
+
+            if (accounts[i] == null) {
+
+                continue ;
+
+            }
 
             if(account.getHolder().getFirstName().equals(accounts[i].getHolder().getFirstName())){
                 if(account.getHolder().getLastName().equals(accounts[i].getHolder().getLastName())){
@@ -41,7 +52,7 @@ public class AccountDatabase {
         final int increment = 5;
         
         
-        Account[] newAccounts = new Account[accounts.length + increment] ; // Ask if this a magic number
+        Account[] newAccounts = new Account[accounts.length + increment] ;
 
         for (int i = 0 ; i < size ; i++) {
 
@@ -70,12 +81,14 @@ public class AccountDatabase {
             grow();
         }
         
-        for(int i = size; i < accounts.length; i++){
+        for(int i = 0; i < accounts.length; i++){
             if(accounts[i] == null){
                 accounts[i] = account;
                 break ;
             }
         }
+
+        size++ ;
         
         return true ;
 
@@ -97,6 +110,8 @@ public class AccountDatabase {
         }
         
         accounts[index] = null ; //will need to add nullcheck in the print
+
+        size-- ;
 
         return true ;
 
@@ -161,9 +176,21 @@ public class AccountDatabase {
         Account temp;
        
         for(int i = 0; i < size-1; i ++){
+            if (accounts[i] == null) {
+
+                continue ;
+
+            }
+
             for(int j = i+1; j < size; j++){
 
-                if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1 ){ //compares i to j
+                if (accounts[j] == null) {
+
+                    continue ;
+
+                }
+
+                if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1){ //compares i to j
                    
                     temp= accounts[i];
                     accounts[i] = accounts[j];
@@ -181,8 +208,19 @@ public class AccountDatabase {
         Account temp;
 
         for(int i =0; i < size - 1; i ++){
+            if (accounts[i] == null) {
+
+                continue ;
+
+            }
+
             for(int k = i +1; k < size; k++){
-                if(accounts[i].getHolder().getLastName().compareToIgnoreCase(accounts[k].getHolder().getLastName()) == 1){
+                if (accounts[k] == null) {
+
+                    continue ;
+    
+                }
+                if(accounts[i].getHolder().getLastName().compareToIgnoreCase(accounts[k].getHolder().getLastName()) > 0){
                     temp = accounts[i];
                     accounts[i] = accounts[k];
                     accounts[k] = temp;
@@ -195,11 +233,24 @@ public class AccountDatabase {
     }
 
     public void printByDateOpen() {
-        //calculate fees needed
+        
         sortByDateOpen();
 
         for(int i = 0; i < accounts.length; i ++){
-            System.out.println(accounts[i].toString());
+            if (accounts[i] == null) {
+
+                continue ;
+
+            }
+
+            System.out.println(accounts[i].toString()) ;
+            double interest = accounts[i].monthlyInterest() ;
+            System.out.println("-interest: $ " + String.format("%.2f", interest)) ;
+            double fee = accounts[i].monthlyFee() ;
+            System.out.println("-fee: $ " + String.format("%.2f", fee));
+            accounts[i].setBalance(accounts[i].getBalance() + interest - fee) ;
+            System.out.println("-new balance: $ " + String.format("%.2f", accounts[i].getBalance())) ;
+
         }
 
 
@@ -207,15 +258,28 @@ public class AccountDatabase {
     }
 
     public void printByLastName() {
+
         sortByLastName();
 
         for(int i =0; i < accounts.length; i ++){
-            System.out.println(accounts[i].toString()); 
+            if (accounts[i] == null) {
+
+                continue ;
+
+            }
+            System.out.println(accounts[i].toString()) ;
+            double interest = accounts[i].monthlyInterest() ;
+            System.out.println("-interest: $ " + String.format("%.2f", interest)) ;
+            double fee = accounts[i].monthlyFee() ;
+            System.out.println("-fee: $ " + String.format("%.2f", fee));
+            accounts[i].setBalance(accounts[i].getBalance() + interest - fee) ;
+            System.out.println("-new balance: $ " + String.format("%.2f", accounts[i].getBalance())) ;
         }
 
     }
 
     public void printAccounts() {
+
         for(int i = 0; i < size; i ++){
             if(accounts[i] == null){
                 continue;
@@ -233,5 +297,14 @@ public class AccountDatabase {
         return this.accounts;
     }
 
+    public void incrementWithdrawals(MoneyMarket m) {
 
+        int index = find(m) ;
+
+        MoneyMarket temp = (MoneyMarket)accounts[index] ;
+        temp.setWithdrawals(temp.getWithdrawals()+ 1);
+        accounts[index] = temp ;
+
+    }
+    
 }

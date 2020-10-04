@@ -8,6 +8,7 @@ import java.util.Scanner ;
  */
 
 public class TransactionManager {
+    
 
     public void run() {
 
@@ -30,7 +31,7 @@ public class TransactionManager {
 
             if (input.length() < 2) { // Invalid input
 
-                
+                System.out.println("Command '" + input +"' not supported!");
                 continue ;
 
             }
@@ -41,16 +42,35 @@ public class TransactionManager {
 
                 case 'O': { // open
 
-                Profile profile = new Profile() ; // All of this hasn't been tested yet!
-                profile.setFirstName(split[1]);
-                profile.setLastName(split[2]) ;
+                    Profile profile = new Profile() ; 
+                    profile.setFirstName(split[1]);
+                    profile.setLastName(split[2]) ;
                 
-                double bal = Double.parseDouble(split[3]) ;
+                    double bal ;
 
-                String[] d = split[4].split("/") ;
+                    try {
 
-                Date date = new Date() ;
-                date.setDate(d);
+                        bal = Double.parseDouble(split[3]) ;
+
+                    } catch (NumberFormatException nfe ) {
+
+                        System.out.println("Input data type mismatch.");
+                        break ;
+
+                    }
+
+                    String[] d = split[4].split("/") ;
+
+                    Date date = new Date() ;
+                    
+                    date.setDate(d);
+
+                    if (!date.isValid()) {
+
+                        System.out.println(date.toString() + " is not a valid date!");
+                        break ;
+
+                    }
 
                     switch(input.charAt(1)) {
 
@@ -59,9 +79,18 @@ public class TransactionManager {
                             checking.setHolder(profile);
                             checking.setBalance(bal);
                             checking.setOpenDate(date);
+                            if (!verifyBool(split[5])) {
+                                System.out.println("Input data type mismatch.");
+                                break ;
+                            }
                             checking.setDirectDeposit(Boolean.parseBoolean(split[5]));
 
-                            database.add(checking) ;
+                            if (!database.add(checking)) {
+
+                                System.out.println("Account is already in the database.");
+                                break ;
+
+                            }
                             System.out.println("Account opened and added to the database.");
                             break ;
                         case 'S': // savings account
@@ -69,9 +98,18 @@ public class TransactionManager {
                             savings.setHolder(profile) ;
                             savings.setBalance(bal) ;
                             savings.setOpenDate(date) ;
+                            if (!verifyBool(split[5])) {
+                                System.out.println("Input data type mismatch.");
+                                break ;
+                            }
                             savings.setLoyal(Boolean.parseBoolean(split[5]));
 
-                            database.add(savings) ;
+                            if (!database.add(savings)) {
+
+                                System.out.println("Account is already in the database.");
+                                break ;
+
+                            }
                             System.out.println("Account opened and added to the database.");
                             break ;
                         case 'M': // money market account
@@ -81,7 +119,12 @@ public class TransactionManager {
                             moneyMarket.setOpenDate(date) ;
                             moneyMarket.setWithdrawals(0);
 
-                            database.add(moneyMarket) ;
+                            if (!database.add(moneyMarket)) {
+
+                                System.out.println("Account is already in the database.");
+                                break ;
+
+                            }
                             System.out.println("Account opened and added to the database.");
                             break ;
                         default: // invalid
@@ -158,7 +201,18 @@ public class TransactionManager {
                     profile.setFirstName(split[1]);
                     profile.setLastName(split[2]) ;
 
-                    double deposit = Double.parseDouble(split[3]) ;
+                    double deposit ;
+
+                    try {
+
+                        deposit = Double.parseDouble(split[3]) ;
+
+                    } catch (NumberFormatException nfe ) {
+
+                        System.out.println("Input data type mismatch.");
+                        break ;
+
+                    }
 
                     switch(input.charAt(1)) {
 
@@ -220,7 +274,18 @@ public class TransactionManager {
                     profile.setFirstName(split[1]);
                     profile.setLastName(split[2]) ;
 
-                    double withdrawal = Double.parseDouble(split[3]) ;
+                    double withdrawal ;
+
+                    try {
+
+                        withdrawal = Double.parseDouble(split[3]) ;
+
+                    } catch (NumberFormatException nfe ) {
+
+                        System.out.println("Input data type mismatch.");
+                        break ;
+
+                    }
                     
                     switch(input.charAt(1)) {
 
@@ -277,7 +342,8 @@ public class TransactionManager {
 
                             if (result == 0) {
 
-                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn account.");
+                                database.incrementWithdrawals(moneyMarket);
+                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn from account.");
 
                             } else if (result == 1) {
 
@@ -304,16 +370,22 @@ public class TransactionManager {
                     switch(input.charAt(1)) {
 
                         case 'A': // print the list of accounts in the database
+                            if (checkEmptyDatabase(database.getAccounts())) {
+                                System.out.println("Database is empty.");
+                            }
                             database.printAccounts() ;
                             break ;
                         case 'D': { // calculate the monthly interests and fees
-                            
+                            if (checkEmptyDatabase(database.getAccounts())) {
+                                System.out.println("Database is empty.");
+                            }
                             database.printByDateOpen() ;
-                            
                             break ;
                         }
                         case 'N': { // same with PD but sort by the last names in ascending order
-
+                            if (checkEmptyDatabase(database.getAccounts())) {
+                                System.out.println("Database is empty.");
+                            }
                             database.printByLastName() ;
                             break ;
                         }
@@ -335,6 +407,33 @@ public class TransactionManager {
 
         scanner.close() ;
         
+    }
+
+    private boolean verifyBool(String s){ //Helper method for verification of valid boolean inputs
+
+        if(s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")){
+
+            return true ;
+           
+        }
+
+        return false ;
+    }
+
+    private boolean checkEmptyDatabase(Account[] a) {
+
+        for (int i = 0 ; i < a.length ; i++) {
+
+            if (a[i] != null) {
+
+                return false ;
+
+            }
+
+        }
+
+        return true ;
+
     }
     
 }
