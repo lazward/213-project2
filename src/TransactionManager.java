@@ -59,20 +59,35 @@ public class TransactionManager {
                             checking.setHolder(profile);
                             checking.setBalance(bal);
                             checking.setOpenDate(date);
+                            checking.setDirectDeposit(Boolean.parseBoolean(split[5]));
+
+                            System.out.println("first name: " + checking.getHolder().getFirstName() + " last name: " + checking.getHolder().getLastName()) ;
+                            System.out.println("balance: " + checking.getBalance() ) ;
+                            System.out.println("date: " + checking.getOpenDate().toString());
+                            System.out.println("direct deposit: " + checking.getDirectDeposit());
+
+                            database.add(checking) ;
                             break ;
                         case 'S': // savings account
                             Savings savings = new Savings() ;
                             savings.setHolder(profile) ;
                             savings.setBalance(bal) ;
                             savings.setOpenDate(date) ;
+                            savings.setLoyal(Boolean.parseBoolean(split[5]));
+
+                            database.add(savings) ;
                             break ;
                         case 'M': // money market account
                             MoneyMarket moneyMarket = new MoneyMarket() ;
                             moneyMarket.setHolder(profile) ;
                             moneyMarket.setBalance(bal) ;
                             moneyMarket.setOpenDate(date) ;
+                            moneyMarket.setWithdrawals(0);
+
+                            database.add(moneyMarket) ;    
                             break ;
                         default: // invalid
+                            System.out.println("Command '" + split[0] + "' not supported!");
                             break ;
 
                     }
@@ -81,15 +96,54 @@ public class TransactionManager {
 
                 case 'C': // close
 
+                    profile = new Profile() ;
+                    profile.setFirstName(split[1]);
+                    profile.setLastName(split[2]) ;
+
                     switch(input.charAt(1)) {
 
                         case 'C': // checking account
+                            Checking checking = new Checking() ;
+                            checking.setHolder(profile);
+                            if (database.remove(checking)) {
+
+                                System.out.println("Account closed and removed from the database.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+
+                            }
+                            
                             break ;
                         case 'S': // savings account
+                            Savings savings = new Savings() ;
+                            savings.setHolder(profile);
+                            if (database.remove(savings)) {
+
+                                System.out.println("Account closed and removed from the database.");
+
+                            } else {
+
+                                System.out.println("Account does not exist.");
+
+                            }
                             break ;
                         case 'M': // money market account
+                        MoneyMarket moneyMarket = new MoneyMarket() ;
+                        moneyMarket.setHolder(profile);
+                        if (database.remove(moneyMarket)) {
+
+                            System.out.println("Account closed and removed from the database.");
+
+                        } else {
+
+                            System.out.println("Account does not exist.");
+
+                        }
                             break ;
                         default: // invalid
+                            System.out.println("Command '" + split[0] + "' not supported!");
                             break ;
 
                     }
@@ -149,6 +203,7 @@ public class TransactionManager {
                     break ;
 
                 default:
+                    System.out.println("Command '" + split[0] +"' not supported!");
                     break ;
 
             }

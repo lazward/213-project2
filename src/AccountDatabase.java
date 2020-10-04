@@ -14,9 +14,19 @@ public class AccountDatabase {
         //Search through dataase and return respective index of account
         for(int i =0; i < accounts.length - 1; i++){
 
-            if(accounts[i].toString().equals(account.toString())){
-                //compare resulting toStrings
-                return i;
+            if(account.getHolder().getFirstName().equals(accounts[i].getHolder().getFirstName())){
+                if(account.getHolder().getLastName().equals(accounts[i].getHolder().getLastName())){
+                    //three else if for type of account
+
+                    String str = account.getClass().getName();    
+
+                    //if they match the account type
+                    if(str.equals(accounts[i].getClass().getName())){
+                        return i;
+                    
+                }
+            }
+               
 
             }
         }
@@ -148,16 +158,16 @@ public class AccountDatabase {
 
     private void sortByDateOpen() {
 
-        
-       int temp;
+        Account temp;
+       
         for(int i = 0; i < size; i ++){
             for(int j = i+1; j < size; j++){
 
-                if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1 ){
-                    temp = accounts[i].getOpenDate();
-                    accounts[i]
-                    //
-
+                if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1 ){ //compares i to j
+                   
+                    temp= accounts[i];
+                    accounts[i] = accounts[j];
+                    accounts[j] = temp;
                 }
 
             }
@@ -167,10 +177,18 @@ public class AccountDatabase {
     }
 
     private void sortByLastName() {
+        
+        
 
     }
 
     public void printByDateOpen() {
+        sortByDateOpen();
+
+        for(int i = 0; i < accounts.length; i ++){
+            System.out.println(accounts[i].toString());
+        }
+
 
 
     }
