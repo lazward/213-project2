@@ -289,10 +289,19 @@ public class AccountDatabase {
         
 
     }
+
+    /**
+     * 
+     * @return
+     */
     public int getSize(){
         return this.size;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Account[] getAccounts(){
         return this.accounts;
     }

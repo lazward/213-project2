@@ -24,7 +24,6 @@ public class Checking extends Account {
     }
 
     public double monthlyInterest() {
-      
 
         return ((interest/months) * getBalance());
 

@@ -1,4 +1,4 @@
-import java.util.Scanner ;
+import java.util.Scanner;
 
 /**
  *
@@ -7,146 +7,146 @@ import java.util.Scanner ;
  *
  */
 
+
 public class TransactionManager {
-    
 
     public void run() {
 
         System.out.println("Transaction processing starts.....");
 
-        Scanner scanner = new Scanner(System.in) ;
+        Scanner scanner = new Scanner(System.in);
 
-        AccountDatabase database = new AccountDatabase() ;
+        AccountDatabase database = new AccountDatabase();
 
         while (true) {
 
-            String input = scanner.nextLine() ;
+            String input = scanner.nextLine();
 
             if (input.equals("Q")) {
 
                 System.out.println("Transaction processing completed.");
-                break ;
+                break;
 
             }
 
             if (input.length() < 2) { // Invalid input
 
-                System.out.println("Command '" + input +"' not supported!");
-                continue ;
+                System.out.println("Command '" + input + "' not supported!");
+                continue;
 
             }
 
-            String[] split = input.split(" ") ;
+            String[] split = input.split(" ");
 
-            switch(input.charAt(0)) {
+            switch (input.charAt(0)) {
 
                 case 'O': { // open
 
-                    Profile profile = new Profile() ; 
+                    Profile profile = new Profile();
                     profile.setFirstName(split[1]);
-                    profile.setLastName(split[2]) ;
-                
-                    double bal ;
+                    profile.setLastName(split[2]);
+
+                    double bal;
 
                     try {
 
-                        bal = Double.parseDouble(split[3]) ;
+                        bal = Double.parseDouble(split[3]);
 
-                    } catch (NumberFormatException nfe ) {
+                    } catch (NumberFormatException nfe) {
 
                         System.out.println("Input data type mismatch.");
-                        break ;
+                        break;
 
                     }
 
-                    String[] d = split[4].split("/") ;
+                    String[] d = split[4].split("/");
 
-                    Date date = new Date() ;
-                    
+                    Date date = new Date();
+
                     date.setDate(d);
 
                     if (!date.isValid()) {
 
                         System.out.println(date.toString() + " is not a valid date!");
-                        break ;
+                        break;
 
                     }
 
-                    switch(input.charAt(1)) {
+                    switch (input.charAt(1)) {
 
                         case 'C': // checking account
-                            Checking checking = new Checking() ;
+                            Checking checking = new Checking();
                             checking.setHolder(profile);
                             checking.setBalance(bal);
                             checking.setOpenDate(date);
                             if (!verifyBool(split[5])) {
                                 System.out.println("Input data type mismatch.");
-                                break ;
+                                break;
                             }
                             checking.setDirectDeposit(Boolean.parseBoolean(split[5]));
 
                             if (!database.add(checking)) {
 
                                 System.out.println("Account is already in the database.");
-                                break ;
+                                break;
 
                             }
                             System.out.println("Account opened and added to the database.");
-                            break ;
+                            break;
                         case 'S': // savings account
-                            Savings savings = new Savings() ;
-                            savings.setHolder(profile) ;
-                            savings.setBalance(bal) ;
-                            savings.setOpenDate(date) ;
+                            Savings savings = new Savings();
+                            savings.setHolder(profile);
+                            savings.setBalance(bal);
+                            savings.setOpenDate(date);
                             if (!verifyBool(split[5])) {
                                 System.out.println("Input data type mismatch.");
-                                break ;
+                                break;
                             }
                             savings.setLoyal(Boolean.parseBoolean(split[5]));
 
                             if (!database.add(savings)) {
 
                                 System.out.println("Account is already in the database.");
-                                break ;
+                                break;
 
                             }
                             System.out.println("Account opened and added to the database.");
-                            break ;
+                            break;
                         case 'M': // money market account
-                            MoneyMarket moneyMarket = new MoneyMarket() ;
-                            moneyMarket.setHolder(profile) ;
-                            moneyMarket.setBalance(bal) ;
-                            moneyMarket.setOpenDate(date) ;
+                            MoneyMarket moneyMarket = new MoneyMarket();
+                            moneyMarket.setHolder(profile);
+                            moneyMarket.setBalance(bal);
+                            moneyMarket.setOpenDate(date);
                             moneyMarket.setWithdrawals(0);
 
                             if (!database.add(moneyMarket)) {
 
                                 System.out.println("Account is already in the database.");
-                                break ;
+                                break;
 
                             }
                             System.out.println("Account opened and added to the database.");
-                            break ;
+                            break;
                         default: // invalid
                             System.out.println("Command '" + split[0] + "' not supported!");
-                            break ;
+                            break;
 
                     }
 
-                    break ;
+                    break;
 
                 }
 
                 case 'C': { // close
 
-                    Profile profile = new Profile() ;
+                    Profile profile = new Profile();
                     profile.setFirstName(split[1]);
-                    profile.setLastName(split[2]) ;
+                    profile.setLastName(split[2]);
 
-                    switch(input.charAt(1)) {
+                    switch (input.charAt(1)) {
 
                         case 'C': // checking account
-                            Checking checking = new Checking() ;
+                            Checking checking = new Checking();
                             checking.setHolder(profile);
                             if (database.remove(checking)) {
 
@@ -157,10 +157,10 @@ public class TransactionManager {
                                 System.out.println("Account does not exist.");
 
                             }
-                            
-                            break ;
+
+                            break;
                         case 'S': // savings account
-                            Savings savings = new Savings() ;
+                            Savings savings = new Savings();
                             savings.setHolder(profile);
                             if (database.remove(savings)) {
 
@@ -171,53 +171,53 @@ public class TransactionManager {
                                 System.out.println("Account does not exist.");
 
                             }
-                            break ;
+                            break;
                         case 'M': // money market account
-                            MoneyMarket moneyMarket = new MoneyMarket() ;
+                            MoneyMarket moneyMarket = new MoneyMarket();
                             moneyMarket.setHolder(profile);
-                        if (database.remove(moneyMarket)) {
+                            if (database.remove(moneyMarket)) {
 
-                            System.out.println("Account closed and removed from the database.");
+                                System.out.println("Account closed and removed from the database.");
 
-                        } else {
+                            } else {
 
-                            System.out.println("Account does not exist.");
+                                System.out.println("Account does not exist.");
 
-                        }
-                            break ;
+                            }
+                            break;
                         default: // invalid
                             System.out.println("Command '" + split[0] + "' not supported!");
-                            break ;
+                            break;
 
                     }
 
-                    break ;
+                    break;
 
                 }
 
                 case 'D': { // deposit
 
-                    Profile profile = new Profile() ;
+                    Profile profile = new Profile();
                     profile.setFirstName(split[1]);
-                    profile.setLastName(split[2]) ;
+                    profile.setLastName(split[2]);
 
-                    double deposit ;
+                    double deposit;
 
                     try {
 
-                        deposit = Double.parseDouble(split[3]) ;
+                        deposit = Double.parseDouble(split[3]);
 
-                    } catch (NumberFormatException nfe ) {
+                    } catch (NumberFormatException nfe) {
 
                         System.out.println("Input data type mismatch.");
-                        break ;
+                        break;
 
                     }
 
-                    switch(input.charAt(1)) {
+                    switch (input.charAt(1)) {
 
                         case 'C': // checking account
-                            Checking checking = new Checking() ;
+                            Checking checking = new Checking();
                             checking.setHolder(profile);
 
                             if (database.deposit(checking, deposit)) {
@@ -229,10 +229,10 @@ public class TransactionManager {
                                 System.out.println("Account does not exist.");
 
                             }
-                            break ;
+                            break;
                         case 'S': // savings account
-                            Savings savings = new Savings() ;
-                            savings.setHolder(profile) ;
+                            Savings savings = new Savings();
+                            savings.setHolder(profile);
 
                             if (database.deposit(savings, deposit)) {
 
@@ -243,10 +243,10 @@ public class TransactionManager {
                                 System.out.println("Account does not exist.");
 
                             }
-                            break ;
+                            break;
                         case 'M': // money market account
-                            MoneyMarket moneyMarket = new MoneyMarket() ;
-                            moneyMarket.setHolder(profile) ;
+                            MoneyMarket moneyMarket = new MoneyMarket();
+                            moneyMarket.setHolder(profile);
 
                             if (database.deposit(moneyMarket, deposit)) {
 
@@ -257,43 +257,43 @@ public class TransactionManager {
                                 System.out.println("Account does not exist.");
 
                             }
-                            break ;
+                            break;
                         default: // invalid
-                        System.out.println("Command '" + split[0] + "' not supported!");
-                        break ;
+                            System.out.println("Command '" + split[0] + "' not supported!");
+                            break;
 
                     }
 
-                    break ;
+                    break;
 
                 }
 
                 case 'W': // withdraw
-                
-                    Profile profile = new Profile() ;
-                    profile.setFirstName(split[1]);
-                    profile.setLastName(split[2]) ;
 
-                    double withdrawal ;
+                    Profile profile = new Profile();
+                    profile.setFirstName(split[1]);
+                    profile.setLastName(split[2]);
+
+                    double withdrawal;
 
                     try {
 
-                        withdrawal = Double.parseDouble(split[3]) ;
+                        withdrawal = Double.parseDouble(split[3]);
 
-                    } catch (NumberFormatException nfe ) {
+                    } catch (NumberFormatException nfe) {
 
                         System.out.println("Input data type mismatch.");
-                        break ;
+                        break;
 
                     }
-                    
-                    switch(input.charAt(1)) {
+
+                    switch (input.charAt(1)) {
 
                         case 'C': { // checking account
-                            Checking checking = new Checking() ;
+                            Checking checking = new Checking();
                             checking.setHolder(profile);
 
-                            int result = database.withdrawal(checking, withdrawal) ;
+                            int result = database.withdrawal(checking, withdrawal);
 
                             if (result == 0) {
 
@@ -306,16 +306,16 @@ public class TransactionManager {
                             } else {
 
                                 System.out.println("Account does not exist.");
-                                
+
                             }
 
-                            break ;
+                            break;
                         }
                         case 'S': { // savings account
-                            Savings savings = new Savings() ;
-                            savings.setHolder(profile) ;
+                            Savings savings = new Savings();
+                            savings.setHolder(profile);
 
-                            int result = database.withdrawal(savings, withdrawal) ;
+                            int result = database.withdrawal(savings, withdrawal);
 
                             if (result == 0) {
 
@@ -328,17 +328,17 @@ public class TransactionManager {
                             } else {
 
                                 System.out.println("Account does not exist.");
-                                
+
                             }
 
-                            break ;
+                            break;
                         }
                         case 'M': { // money market account
 
-                            MoneyMarket moneyMarket = new MoneyMarket() ;
-                            moneyMarket.setHolder(profile) ;
+                            MoneyMarket moneyMarket = new MoneyMarket();
+                            moneyMarket.setHolder(profile);
 
-                            int result = database.withdrawal(moneyMarket, withdrawal) ;
+                            int result = database.withdrawal(moneyMarket, withdrawal);
 
                             if (result == 0) {
 
@@ -352,88 +352,87 @@ public class TransactionManager {
                             } else {
 
                                 System.out.println("Account does not exist.");
-                                
+
                             }
-                            break ;
+                            break;
                         }
                         default: // invalid
                             System.out.println("Command '" + split[0] + "' not supported!");
-                            break ;
-
+                            break;
 
                     }
 
-                    break ;
+                    break;
 
                 case 'P':
 
-                    switch(input.charAt(1)) {
+                    switch (input.charAt(1)) {
 
                         case 'A': // print the list of accounts in the database
                             if (checkEmptyDatabase(database.getAccounts())) {
                                 System.out.println("Database is empty.");
                             }
-                            database.printAccounts() ;
-                            break ;
+                            database.printAccounts();
+                            break;
                         case 'D': { // calculate the monthly interests and fees
                             if (checkEmptyDatabase(database.getAccounts())) {
                                 System.out.println("Database is empty.");
                             }
-                            database.printByDateOpen() ;
-                            break ;
+                            database.printByDateOpen();
+                            break;
                         }
                         case 'N': { // same with PD but sort by the last names in ascending order
                             if (checkEmptyDatabase(database.getAccounts())) {
                                 System.out.println("Database is empty.");
                             }
-                            database.printByLastName() ;
-                            break ;
+                            database.printByLastName();
+                            break;
                         }
                         default:
                             System.out.println("Command '" + split[0] + "' not supported!");
-                            break ;
+                            break;
 
                     }
 
-                    break ;
+                    break;
 
                 default:
-                    System.out.println("Command '" + split[0] +"' not supported!");
-                    break ;
+                    System.out.println("Command '" + split[0] + "' not supported!");
+                    break;
 
             }
 
         }
 
-        scanner.close() ;
-        
+        scanner.close();
+
     }
 
-    private boolean verifyBool(String s){ //Helper method for verification of valid boolean inputs
+    private boolean verifyBool(String s) { // Helper method for verification of valid boolean inputs
 
-        if(s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")){
+        if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")) {
 
-            return true ;
-           
+            return true;
+
         }
 
-        return false ;
+        return false;
     }
 
     private boolean checkEmptyDatabase(Account[] a) {
 
-        for (int i = 0 ; i < a.length ; i++) {
+        for (int i = 0; i < a.length; i++) {
 
             if (a[i] != null) {
 
-                return false ;
+                return false;
 
             }
 
         }
 
-        return true ;
+        return true;
 
     }
-    
+
 }

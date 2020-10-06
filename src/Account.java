@@ -42,8 +42,20 @@ public abstract class Account {
 
     }
 
+    /**
+     * 
+     * Calculate the monthly interest, dependent on the account type.
+     * 
+     * @return
+     */
     public abstract double monthlyInterest();
 
+    /**
+     * 
+     * Calculate the monthly fee, dependent on the account type.
+     * 
+     * @return
+     */
     public abstract double monthlyFee();
 
     // Helper methods for accessing Private Variables
@@ -74,6 +86,12 @@ public abstract class Account {
         this.dateOpen = newDate;
     }
 
+    /**
+     * 
+     * Print the account-specific condition.
+     * 
+     * @return
+     */
     public abstract String specialString();
 
 }
