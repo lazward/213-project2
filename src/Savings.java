@@ -35,7 +35,7 @@ public class Savings extends Account {
      * 
      * Helper method to manually set the loyalty status of a saving account.
      * 
-     * @param boolean value, true if the account was set successfully, false otherwise.
+     * @param b Boolean value, true if the account was set successfully, false otherwise.
      * 
      */
     public void setLoyal(boolean b) {

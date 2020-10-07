@@ -16,8 +16,8 @@ public class Date implements Comparable<Date> {
      * 
      * Compare two dates, accounting for varying month lengths and leap years
      * 
-     * @param date
-     * @return
+     * @param date Date to compare to.
+     * @return Returns 0 if dates are equal, 1 if the first date is greater, and -1 if the second date is greater.
      */
     public int compareTo(Date date) {
 
@@ -129,7 +129,7 @@ public class Date implements Comparable<Date> {
      * Take a split string array containing the month, date and year, and set the
      * date as such.
      * 
-     * @param date
+     * @param date String array containing date to be parsed into Date format.
      */
     public void setDate(String[] date) {
 

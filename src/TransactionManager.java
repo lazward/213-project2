@@ -418,7 +418,7 @@ public class TransactionManager {
      * 
      * Helper method for verification of boolean inputs from the user.
      * 
-     * @param String from the user's input.
+     * @param s String from the user's input.
      * @return boolean, true if the boolean is valid input, false otherwise.
      * 
      */
@@ -437,6 +437,7 @@ public class TransactionManager {
      * 
      * Helper method to check if any given Account Database is empty or not.
      * 
+     * @param a Account database to be checked.
      * @return boolean, true if the database is empty, false otherwise.
      * 
      */

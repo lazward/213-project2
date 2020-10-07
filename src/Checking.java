@@ -33,7 +33,7 @@ public class Checking extends Account {
      * 
      * Method to set the Checking-Specific direct deposit status of a checking account.
      * 
-     * @param boolean to set the status of
+     * @param b Boolean to determine whether or not the account is a direct deposit or not.
      * 
      */
     public void setDirectDeposit(boolean b) {

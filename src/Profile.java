@@ -37,7 +37,7 @@ public class Profile {
      * 
      * Helper method to set the firstName of a Profile.
      * 
-     * @param String of the name we want to set this Profile's first name to.
+     * @param first String of the name we want to set this Profile's first name to.
      * 
      */
     public void setFirstName(String first) {
@@ -50,7 +50,7 @@ public class Profile {
      * 
      * Helper method to set the lastName of a Profile.
      * 
-     * @param String of the name we want to set this Profile's last name to.
+     * @param last String of the name we want to set this Profile's last name to.
      * 
      */
     public void setLastName(String last) {

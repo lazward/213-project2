@@ -13,7 +13,7 @@ public abstract class Account {
     /**
      * Debit the account's balance by a specified amount.
      * 
-     * @param amount
+     * @param amount The amount to be deducted from the balance.
      */
     public void debit(double amount) {
 
@@ -24,7 +24,7 @@ public abstract class Account {
     /**
      * Credit the account's balance by a specified amount.
      * 
-     * @param amount
+     * @param amount The amount to be added to the balance.
      */
     public void credit(double amount) {
 
@@ -101,7 +101,7 @@ public abstract class Account {
      * 
      * Helper method to set the account holder.
      * 
-     * @param Profile  
+     * @param profile Profile to set account holder to.
      */
     public void setHolder(Profile profile) {
         this.holder = profile;
@@ -111,7 +111,7 @@ public abstract class Account {
      * 
      * Helper method to set the account balance
      * 
-     * @param double  
+     * @param bal Amount to set balance to.
      */
     public void setBalance(double bal) {
         this.balance = bal;
@@ -121,7 +121,7 @@ public abstract class Account {
      * 
      * Helper method to set the account open date.
      * 
-     * @param Date  
+     * @param newDate Date to set account's open date to.
      */
     public void setOpenDate(Date newDate) {
         this.dateOpen = newDate;

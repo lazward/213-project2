@@ -15,7 +15,6 @@ public class AccountDatabase {
      * 
      * Constuctor to create an empty Account Database.
      * 
-     * @return An empty, but initalized Account Database.
      */
     public AccountDatabase() {
         accounts = new Account[5] ;
@@ -27,7 +26,7 @@ public class AccountDatabase {
      * 
      * Method to find if any account is present in an Account Database.
      * 
-     * @param Account to find
+     * @param account Account to find.
      * @return an int indicating the index inside the AccountDatabase where the account is located.
      */
     private int find(Account account) {
@@ -89,7 +88,7 @@ public class AccountDatabase {
      * 
      * Method to add an account to the Account Database specified.
      * 
-     * @param Account to add 
+     * @param account Account to add.
      * @return True if the account was added successfully or false if it wasn't.
      */
     public boolean add(Account account) {
@@ -121,7 +120,7 @@ public class AccountDatabase {
      * 
      * Method to remove an account from the specified Account Database.
      * 
-     * @param Account to remove
+     * @param account Account to remove.
      * @return true if the account was removed successfully, false if wasn't.
      */
     public boolean remove(Account account) {
@@ -146,8 +145,8 @@ public class AccountDatabase {
      * 
      * Method to deposit a set amount of money into a specific account found in the Account Database.
      * 
-     * @param Account to find
-     * @param amount to deposit
+     * @param account Account to find.
+     * @param amount Amount to deposit.
      * @return True if the amount was deposited successfully, false otherwise.
      */
     public boolean deposit(Account account, double amount) {
@@ -172,8 +171,8 @@ public class AccountDatabase {
      * 
      * Method to withdraw a set amount of moeny from a specific account inside the Account Database.
      * 
-     * @param account to withdraw from
-     * @param amount to withdraw from the account.
+     * @param account Account to withdraw from.
+     * @param amount Amount to withdraw from the account.
      * @return Returns an integer code, -1 if the account wasn't found in the database, 1 if there was insufficent funds, or 0 for a successful transaction.
      */
     public int withdrawal(Account account, double amount) {
@@ -370,7 +369,7 @@ public class AccountDatabase {
      * 
      * Helper method for incrementing withdrawals inside any MoneyMarket account.
      * 
-     * @param MoneyMarket account whos withdrawals we need to increment.
+     * @param m Money Market account whose withdrawals we need to increment.
      */
     public void incrementWithdrawals(MoneyMarket m) {
 

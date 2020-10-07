@@ -33,7 +33,7 @@ public class MoneyMarket extends Account {
      * 
      * Helper method to set the number of withdrawals for any given Money Market Account.
      * 
-     * @param int of the number we want to set.
+     * @param i The number we want to set as the number of withdrawals.
      * 
      */
     public void setWithdrawals(int i) {
