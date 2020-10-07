@@ -4,6 +4,7 @@ import org.junit.Test;
 
 /**
  *
+ * Another JUnit test class to check the valididty of our Date Methods.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *

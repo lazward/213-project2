@@ -1,6 +1,5 @@
 /**
- *
- * 
+ *This is an abstract class that defines the common features of all account types.
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
  */
@@ -33,10 +32,15 @@ public abstract class Account {
 
     }
 
+
+    /**
+     * Convert any set account to a string result.
+     * 
+     * @return A valid string comprised of all elements of an account.
+     */
     @Override
     public String toString() {
-        // Convert all respective objects to their string versions
-        // Wll return *Name of holder* $000.000*Dateopened
+        
         return "*" + this.getClass().getName() + "*" + holder.getFirstName() + " " + holder.getLastName() + "* $"
                 + String.format("%.2f", balance) + "*" + dateOpen.toString() + "*" + specialString();
 
@@ -44,44 +48,81 @@ public abstract class Account {
 
     /**
      * 
-     * Calculate the monthly interest, dependent on the account type.
+     * Abstract method to calculate the monthly interest, dependent on the account type.
      * 
-     * @return
+     * @return a double calculating the interest for a set account.
      */
     public abstract double monthlyInterest();
 
     /**
      * 
-     * Calculate the monthly fee, dependent on the account type.
+     * Abstract method to calculate the monthly fee, dependent on the account type.
      * 
-     * @return
+     * @return a double of the monthly fee
      */
     public abstract double monthlyFee();
 
     // Helper methods for accessing Private Variables
 
+    /**
+     * 
+     * Helper method to retrive the account holder information variable.
+     * 
+     * @return a Profile of an account.
+     */
     public Profile getHolder() {
         return this.holder;
     }
 
+    /**
+     * 
+     * Helper method to retrive the balance of an account.
+     * 
+     * @return a double of the balance of an account.
+     */
     public double getBalance() {
         return this.balance;
     }
 
+    /**
+     * 
+     * Helper method to retrive the account's open date
+     * 
+     * @return a Date of opening.
+     */
     public Date getOpenDate() {
         return this.dateOpen;
 
     }
 
     // Helper setters
+
+    /**
+     * 
+     * Helper method to set the account holder.
+     * 
+     * @param Profile  
+     */
     public void setHolder(Profile profile) {
         this.holder = profile;
     }
 
+     /**
+     * 
+     * Helper method to set the account balance
+     * 
+     * @param double  
+     */
     public void setBalance(double bal) {
         this.balance = bal;
     }
 
+     /**
+     * 
+     * Helper method to set the account open date.
+     * 
+     * @param Date  
+     */
     public void setOpenDate(Date newDate) {
         this.dateOpen = newDate;
     }
@@ -90,7 +131,7 @@ public abstract class Account {
      * 
      * Print the account-specific condition.
      * 
-     * @return
+     * @return String depending on account type.
      */
     public abstract String specialString();
 

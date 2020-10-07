@@ -1,6 +1,7 @@
 /**
  *
- * 
+ * This is the driver class to run Project 2
+ *  
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
  */

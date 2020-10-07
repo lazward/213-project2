@@ -1,5 +1,6 @@
 /**
  *
+ * This class represents a 'Money Market' account type.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
@@ -16,20 +17,50 @@ public class MoneyMarket extends Account {
     private final double interest = .0065 ;
     private final int months = 12;
 
+
+    /**
+     * 
+     * Helper method to return the number of withdrawals for any given MoneyMarket Account.
+     * 
+     * @return int of the number of withdrawals for any given Money Market account.
+     * 
+     */
     public int getWithdrawals() {
         return withdrawals ;
     }
 
+    /**
+     * 
+     * Helper method to set the number of withdrawals for any given Money Market Account.
+     * 
+     * @param int of the number we want to set.
+     * 
+     */
     public void setWithdrawals(int i) {
         withdrawals = i ;
     }
 
+    
+    /**
+     * 
+     * Method to calculate the monthly interest of any account.
+     * 
+     * @return double of the calculated monthly interest.
+     * 
+     */
     public double monthlyInterest(){
         
         return (interest/months) * getBalance();
 
     }
 
+    /**
+     * 
+     * Method to calculate the monthly fee of any account.
+     * 
+     * @return double of the calculated monthly fee.
+     * 
+     */
     public double monthlyFee(){
 
         if(withdrawals <= 6 && getBalance() >= waiver){
@@ -40,6 +71,13 @@ public class MoneyMarket extends Account {
         
     }
 
+    /**
+     * 
+     * Method to find the special resultant string of any account.
+     * 
+     * @return string of this specific account.
+     * 
+     */
     public String specialString() { 
 
         if (withdrawals == 1) {

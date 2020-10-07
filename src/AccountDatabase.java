@@ -1,5 +1,6 @@
 /**
- *
+ * This is an array-based container class with an initial capacity of 5. 
+ * It will automatically grow the capacity by 5 if the database is full.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
@@ -10,11 +11,25 @@ public class AccountDatabase {
     private Account[] accounts ;
     private int size ;
 
+    /**
+     * 
+     * Constuctor to create an empty Account Database.
+     * 
+     * @return An empty, but initalized Account Database.
+     */
     public AccountDatabase() {
         accounts = new Account[5] ;
         size = 0 ;
     }
 
+    
+    /**
+     * 
+     * Method to find if any account is present in an Account Database.
+     * 
+     * @param Account to find
+     * @return an int indicating the index inside the AccountDatabase where the account is located.
+     */
     private int find(Account account) {
         //Search through dataase and return respective index of account
         for(int i =0; i < accounts.length - 1; i++){
@@ -27,7 +42,7 @@ public class AccountDatabase {
 
             if(account.getHolder().getFirstName().equals(accounts[i].getHolder().getFirstName())){
                 if(account.getHolder().getLastName().equals(accounts[i].getHolder().getLastName())){
-                    //three else if for type of account
+                    
 
                     String str = account.getClass().getName();    
 
@@ -46,6 +61,12 @@ public class AccountDatabase {
 
     }
 
+
+    /**
+     * 
+     * Method to grow any Account Database when it has hit its max size.
+     * 
+     */
     private void grow() {
 
 
@@ -66,8 +87,10 @@ public class AccountDatabase {
     
     /**
      * 
-     * @param account
-     * @return
+     * Method to add an account to the Account Database specified.
+     * 
+     * @param Account to add 
+     * @return True if the account was added successfully or false if it wasn't.
      */
     public boolean add(Account account) {
         //Check Capacity and grow if needed
@@ -96,8 +119,10 @@ public class AccountDatabase {
 
     /**
      * 
-     * @param account
-     * @return
+     * Method to remove an account from the specified Account Database.
+     * 
+     * @param Account to remove
+     * @return true if the account was removed successfully, false if wasn't.
      */
     public boolean remove(Account account) {
 
@@ -119,9 +144,11 @@ public class AccountDatabase {
 
     /**
      * 
-     * @param account
-     * @param amount
-     * @return
+     * Method to deposit a set amount of money into a specific account found in the Account Database.
+     * 
+     * @param Account to find
+     * @param amount to deposit
+     * @return True if the amount was deposited successfully, false otherwise.
      */
     public boolean deposit(Account account, double amount) {
         // find + credit
@@ -143,12 +170,14 @@ public class AccountDatabase {
 
     /**
      * 
-     * @param account
-     * @param amount
-     * @return
+     * Method to withdraw a set amount of moeny from a specific account inside the Account Database.
+     * 
+     * @param account to withdraw from
+     * @param amount to withdraw from the account.
+     * @return Returns an integer code, -1 if the account wasn't found in the database, 1 if there was insufficent funds, or 0 for a successful transaction.
      */
     public int withdrawal(Account account, double amount) {
-        //find + debit
+        
 
         int index = find(account) ;
 
@@ -171,6 +200,12 @@ public class AccountDatabase {
 
     }
 
+
+    /**
+     * 
+     * Method to sort the given Account Database based on the open dates of accounts.
+     * 
+     */
     private void sortByDateOpen() {
 
         Account temp;
@@ -203,6 +238,11 @@ public class AccountDatabase {
 
     }
 
+    /**
+     * 
+     * Method to sort the given Account Database based on the last name of account holders.
+     * 
+     */
     private void sortByLastName() {
 
         Account temp;
@@ -232,6 +272,11 @@ public class AccountDatabase {
 
     }
 
+    /**
+     * 
+     * Method to print the given Account Database based on the open dates of accounts.
+     * 
+     */
     public void printByDateOpen() {
         
         sortByDateOpen();
@@ -257,6 +302,11 @@ public class AccountDatabase {
 
     }
 
+    /**
+     * 
+     * Method to print the given Account Database based on the last names of account holders.
+     * 
+     */
     public void printByLastName() {
 
         sortByLastName();
@@ -278,6 +328,11 @@ public class AccountDatabase {
 
     }
 
+    /**
+     * 
+     * Method to print the account using our toString method.
+     * 
+     */
     public void printAccounts() {
 
         for(int i = 0; i < size; i ++){
@@ -292,7 +347,9 @@ public class AccountDatabase {
 
     /**
      * 
-     * @return
+     * Helper method to retrive the size of an Account Database.
+     * 
+     * @return int of the current Account Database size.
      */
     public int getSize(){
         return this.size;
@@ -300,12 +357,21 @@ public class AccountDatabase {
 
     /**
      * 
-     * @return
+     * Helper method to return the Array of Accounts present in an Account Database.
+     * 
+     * @return an Account[] of accounts inside any set Database.
      */
     public Account[] getAccounts(){
         return this.accounts;
     }
 
+    
+    /**
+     * 
+     * Helper method for incrementing withdrawals inside any MoneyMarket account.
+     * 
+     * @param MoneyMarket account whos withdrawals we need to increment.
+     */
     public void incrementWithdrawals(MoneyMarket m) {
 
         int index = find(m) ;

@@ -1,5 +1,6 @@
 /**
- *
+ * A date class that is used in all accounts.
+ * This class implements the Java Interface Comparable.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
@@ -54,6 +55,13 @@ public class Date implements Comparable<Date> {
 
     }
 
+    
+    /**
+     * 
+     * An overridden toString method to return the proper formatted date.
+     * 
+     * @return String of any given Date.
+     */
     @Override
     public String toString() {
 
@@ -63,7 +71,9 @@ public class Date implements Comparable<Date> {
 
     /**
      * 
-     * @return
+     * A helper method to check for invalid dates.
+     * 
+     * @return boolean, true if the date is valid, false if it isnt.
      */
     public boolean isValid() { // Check if these numbers count as magic numbers
 
@@ -115,6 +125,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
+     * 
      * Take a split string array containing the month, date and year, and set the
      * date as such.
      * 

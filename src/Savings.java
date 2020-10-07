@@ -1,12 +1,13 @@
 /**
  *
+ * This class represents a 'Savings' type of Account.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
  */
 
 public class Savings extends Account {
-    //For every SUBCLASS of an abstract class we need the abstract methods of the parent
+    
 
     //We need three constants per account type
     private final double fee = 5 ;
@@ -18,16 +19,38 @@ public class Savings extends Account {
 
     private boolean isLoyal ;
 
+
+    /**
+     * 
+     * Helper method to retrive the loyalty status of a Saving Account.
+     * 
+     * @return boolean, true if the account 'isLoyal', false otherwise.
+     * 
+     */
     public boolean getLoyal() {
         return isLoyal; 
     }
 
+    /**
+     * 
+     * Helper method to manually set the loyalty status of a saving account.
+     * 
+     * @param boolean value, true if the account was set successfully, false otherwise.
+     * 
+     */
     public void setLoyal(boolean b) {
         isLoyal = b ;
     }
 
+    /**
+     * 
+     * Method to calculate the monthly interest of any account.
+     * 
+     * @return double of the calculated monthly interest.
+     * 
+     */
     public double monthlyInterest(){
-        //monthly interest is annual/12 * current balance
+        
 
         if(getLoyal() == true){
 
@@ -38,6 +61,13 @@ public class Savings extends Account {
 
     }
 
+    /**
+     * 
+     * Method to calculate the monthly fee of any account.
+     * 
+     * @return double of the calculated monthly fee.
+     * 
+     */
     public double monthlyFee(){
 
         if(getBalance() >= waiver){
@@ -48,6 +78,13 @@ public class Savings extends Account {
         
     }
 
+    /**
+     * 
+     * Method to find the special resultant string of any account.
+     * 
+     * @return string of this specific account.
+     * 
+     */
     public String specialString() {
 
         if (isLoyal) {

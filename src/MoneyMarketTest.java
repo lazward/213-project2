@@ -6,6 +6,7 @@ import org.junit.Test;
 
 /**
  *
+ * Utalizing the power of JUnit, this class is for verifying the functionality of our MoneyMarket Methods.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *

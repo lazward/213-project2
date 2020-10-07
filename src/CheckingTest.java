@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import org.junit.Test;
 
 /**
- *
+ * Utalizing JUnit, this is our testing class for verifying our methods functionality.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *

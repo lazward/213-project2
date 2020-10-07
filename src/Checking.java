@@ -1,5 +1,6 @@
 /**
  *
+ * This class represents a 'checking' account type.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
@@ -15,20 +16,50 @@ public class Checking extends Account {
     private final double interest = .0005 ;
     private final int months = 12;
 
+
+    /**
+     * 
+     * Method to return the Checking-Specific direct deposit status.
+     * 
+     * @return boolean containing True if the account has direct deposit, false otherwise.
+     * 
+     */
     public boolean getDirectDeposit() {
         return directDeposit ;
     }
 
+
+    /**
+     * 
+     * Method to set the Checking-Specific direct deposit status of a checking account.
+     * 
+     * @param boolean to set the status of
+     * 
+     */
     public void setDirectDeposit(boolean b) {
         directDeposit = b ;
     }
 
+    /**
+     * 
+     * Method to calculate the monthly interest of any account.
+     * 
+     * @return double of the calculated monthly interest.
+     * 
+     */
     public double monthlyInterest() {
 
         return ((interest/months) * getBalance());
 
     }
 
+    /**
+     * 
+     * Method to calculate the monthly fee of any account.
+     * 
+     * @return double of the calculated monthly fee.
+     * 
+     */
     public double monthlyFee() {
         if(getDirectDeposit() == true || getBalance() >= waiver){
             return 0;
@@ -38,6 +69,13 @@ public class Checking extends Account {
 
     }
 
+    /**
+     * 
+     * Method to find the special resultant string of any account.
+     * 
+     * @return string of this specific account.
+     * 
+     */
     public String specialString() {
           
         if(directDeposit){

@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 /**
  *
+ * This is the user interface class that handles the transactions and displays the results on the console.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
@@ -10,6 +11,11 @@ import java.util.Scanner;
 
 public class TransactionManager {
 
+    /**
+     * 
+     * Driver method for taking in I/O from the user to process account methods based on their input.
+     * 
+     */
     public void run() {
 
         System.out.println("Transaction processing starts.....");
@@ -408,6 +414,14 @@ public class TransactionManager {
 
     }
 
+    /**
+     * 
+     * Helper method for verification of boolean inputs from the user.
+     * 
+     * @param String from the user's input.
+     * @return boolean, true if the boolean is valid input, false otherwise.
+     * 
+     */
     private boolean verifyBool(String s) { // Helper method for verification of valid boolean inputs
 
         if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("false")) {
@@ -419,6 +433,13 @@ public class TransactionManager {
         return false;
     }
 
+    /**
+     * 
+     * Helper method to check if any given Account Database is empty or not.
+     * 
+     * @return boolean, true if the database is empty, false otherwise.
+     * 
+     */
     private boolean checkEmptyDatabase(Account[] a) {
 
         for (int i = 0; i < a.length; i++) {
