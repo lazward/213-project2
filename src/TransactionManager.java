@@ -2,18 +2,19 @@ import java.util.Scanner;
 
 /**
  *
- * This is the user interface class that handles the transactions and displays the results on the console.
+ * This is the user interface class that handles the transactions and displays
+ * the results on the console.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
  */
 
-
 public class TransactionManager {
 
     /**
      * 
-     * Driver method for taking in I/O from the user to process account methods based on their input.
+     * Driver method for taking in I/O from the user to process account methods
+     * based on their input.
      * 
      */
     public void run() {

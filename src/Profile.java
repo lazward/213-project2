@@ -8,9 +8,9 @@
 
 public class Profile {
 
-    private String fname ;
-    private String lname ;
-    
+    private String fname;
+    private String lname;
+
     /**
      * 
      * Method to retrive the firstName of any given profile.
@@ -18,7 +18,7 @@ public class Profile {
      * @return string of this specific Profile's First Name.
      * 
      */
-    public String getFirstName(){   
+    public String getFirstName() {
         return this.fname;
     }
 
@@ -29,7 +29,7 @@ public class Profile {
      * @return string of this Profile's Last Name.
      * 
      */
-    public String getLastName(){
+    public String getLastName() {
         return this.lname;
     }
 
@@ -42,7 +42,7 @@ public class Profile {
      */
     public void setFirstName(String first) {
 
-        fname = first ;
+        fname = first;
 
     }
 
@@ -55,9 +55,7 @@ public class Profile {
      */
     public void setLastName(String last) {
 
-        lname = last ;
+        lname = last;
 
     }
 }
-
-

@@ -8,39 +8,38 @@
 
 public class MoneyMarket extends Account {
 
-    private int withdrawals ;
+    private int withdrawals;
 
-
-    //We need three constants per account type
-    private final double fee = 12 ;
-    private final double waiver = 2500 ;
-    private final double interest = .0065 ;
+    // We need three constants per account type
+    private final double fee = 12;
+    private final double waiver = 2500;
+    private final double interest = .0065;
     private final int months = 12;
-
 
     /**
      * 
-     * Helper method to return the number of withdrawals for any given MoneyMarket Account.
+     * Helper method to return the number of withdrawals for any given MoneyMarket
+     * Account.
      * 
      * @return int of the number of withdrawals for any given Money Market account.
      * 
      */
     public int getWithdrawals() {
-        return withdrawals ;
+        return withdrawals;
     }
 
     /**
      * 
-     * Helper method to set the number of withdrawals for any given Money Market Account.
+     * Helper method to set the number of withdrawals for any given Money Market
+     * Account.
      * 
      * @param i The number we want to set as the number of withdrawals.
      * 
      */
     public void setWithdrawals(int i) {
-        withdrawals = i ;
+        withdrawals = i;
     }
 
-    
     /**
      * 
      * Method to calculate the monthly interest of any account.
@@ -48,9 +47,9 @@ public class MoneyMarket extends Account {
      * @return double of the calculated monthly interest.
      * 
      */
-    public double monthlyInterest(){
-        
-        return (interest/months) * getBalance();
+    public double monthlyInterest() {
+
+        return (interest / months) * getBalance();
 
     }
 
@@ -61,14 +60,14 @@ public class MoneyMarket extends Account {
      * @return double of the calculated monthly fee.
      * 
      */
-    public double monthlyFee(){
+    public double monthlyFee() {
 
-        if(withdrawals <= 6 && getBalance() >= waiver){
+        if (withdrawals <= 6 && getBalance() >= waiver) {
             return 0;
-        }else{
+        } else {
             return fee;
         }
-        
+
     }
 
     /**
@@ -78,11 +77,11 @@ public class MoneyMarket extends Account {
      * @return string of this specific account.
      * 
      */
-    public String specialString() { 
+    public String specialString() {
 
         if (withdrawals == 1) {
 
-            return "1 withdrawal*" ;
+            return "1 withdrawal*";
 
         }
 
@@ -90,5 +89,4 @@ public class MoneyMarket extends Account {
 
     }
 
-    
 }

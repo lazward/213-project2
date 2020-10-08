@@ -7,18 +7,16 @@
  */
 
 public class Savings extends Account {
-    
 
-    //We need three constants per account type
-    private final double fee = 5 ;
-    private final double waiver = 300 ;
-    private final double interest = .0025 ;
+    // We need three constants per account type
+    private final double fee = 5;
+    private final double waiver = 300;
+    private final double interest = .0025;
     private final double specialInt = .0035;
 
     private final int months = 12;
 
-    private boolean isLoyal ;
-
+    private boolean isLoyal;
 
     /**
      * 
@@ -28,18 +26,19 @@ public class Savings extends Account {
      * 
      */
     public boolean getLoyal() {
-        return isLoyal; 
+        return isLoyal;
     }
 
     /**
      * 
      * Helper method to manually set the loyalty status of a saving account.
      * 
-     * @param b Boolean value, true if the account was set successfully, false otherwise.
+     * @param b Boolean value, true if the account was set successfully, false
+     *          otherwise.
      * 
      */
     public void setLoyal(boolean b) {
-        isLoyal = b ;
+        isLoyal = b;
     }
 
     /**
@@ -49,14 +48,13 @@ public class Savings extends Account {
      * @return double of the calculated monthly interest.
      * 
      */
-    public double monthlyInterest(){
-        
+    public double monthlyInterest() {
 
-        if(getLoyal() == true){
+        if (getLoyal() == true) {
 
-            return (specialInt/months) * getBalance();
-        }else{
-            return (interest/months) * getBalance();
+            return (specialInt / months) * getBalance();
+        } else {
+            return (interest / months) * getBalance();
         }
 
     }
@@ -68,14 +66,14 @@ public class Savings extends Account {
      * @return double of the calculated monthly fee.
      * 
      */
-    public double monthlyFee(){
+    public double monthlyFee() {
 
-        if(getBalance() >= waiver){
+        if (getBalance() >= waiver) {
             return 0;
-        }else{
+        } else {
             return fee;
         }
-        
+
     }
 
     /**
@@ -89,13 +87,12 @@ public class Savings extends Account {
 
         if (isLoyal) {
 
-            return "special Savings account" ;
+            return "special Savings account";
 
         }
 
-        return "" ;
+        return "";
 
     }
 
-    
 }

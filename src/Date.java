@@ -1,6 +1,6 @@
 /**
- * A date class that is used in all accounts.
- * This class implements the Java Interface Comparable.
+ * A date class that is used in all accounts. This class implements the Java
+ * Interface Comparable.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
@@ -12,12 +12,35 @@ public class Date implements Comparable<Date> {
     private int month;
     private int day;
 
+    // Constants for months and required days.
+
+    private static final int monthJan = 1;
+    private static final int monthDec = 12;
+
+    private static final int minDays = 1;
+    private static final int maxDays = 31;
+
+    private static final int monthFeb = 2;
+    private static final int invalidFebDays = 30;
+
+    private static final int leapDay = 29;
+
+    private static final int leapTestOne = 4;
+    private static final int leapTestTwo = 100;
+    private static final int leapTestThree = 400;
+
+    private static final int monthApr = 4;
+    private static final int monthSep = 9;
+    private static final int monthJun = 6;
+    private static final int monthNov = 11;
+
     /**
      * 
      * Compare two dates, accounting for varying month lengths and leap years
      * 
      * @param date Date to compare to.
-     * @return Returns 0 if dates are equal, 1 if the first date is greater, and -1 if the second date is greater.
+     * @return Returns 0 if dates are equal, 1 if the first date is greater, and -1
+     *         if the second date is greater.
      */
     public int compareTo(Date date) {
 
@@ -55,7 +78,6 @@ public class Date implements Comparable<Date> {
 
     }
 
-    
     /**
      * 
      * An overridden toString method to return the proper formatted date.
@@ -77,7 +99,7 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValid() { // Check if these numbers count as magic numbers
 
-        if (month < 1 || month > 12 || day < 1 || day > 31) {
+        if (month < monthJan || month > monthDec || day < minDays || day > maxDays) {
 
             return false;
 
@@ -85,24 +107,25 @@ public class Date implements Comparable<Date> {
 
         // Need to check for days of the month (30 vs 31 days, leap year, etc)
 
-        if (month == 2) {
+        if (month == monthFeb) {
 
-            if (day >= 30) {
+            if (day >= invalidFebDays) {
 
                 return false;
 
             }
 
-            if (day == 29) {
+            if (day == leapDay) {
 
-                if (year % 4 != 0) { // Every year that is divisible by four is a leap year
+                if (year % leapTestOne != 0) { // Every year that is divisible by four is a leap year
 
                     return false;
 
                 }
 
-                if (year % 100 == 0 && year % 400 != 0) { // Years that are divisible by 100 are not leap years, but
-                                                          // ones that are divisible by 400 are.
+                if (year % leapTestTwo == 0 && year % leapTestThree != 0) { // Years that are divisible by 100 are not
+                                                                            // leap years, but
+                    // ones that are divisible by 400 are.
 
                     return false;
 
@@ -114,7 +137,7 @@ public class Date implements Comparable<Date> {
 
         }
 
-        if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
+        if ((month == monthApr || month == monthJun || month == monthSep || month == monthNov) && day == maxDays) {
 
             return false;
 

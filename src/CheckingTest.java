@@ -5,14 +5,15 @@ import java.text.DecimalFormat;
 import org.junit.Test;
 
 /**
- * Utalizing JUnit, this is our testing class for verifying our methods functionality.
+ * Utalizing JUnit, this is our testing class for verifying our methods
+ * functionality.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
  */
 public class CheckingTest {
 
-    private static DecimalFormat df = new DecimalFormat("0.00") ;
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     @Test
     public void testMonthlyInterest() {

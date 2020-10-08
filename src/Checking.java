@@ -8,36 +8,37 @@
 
 public class Checking extends Account {
 
-    private boolean directDeposit ;
-    
-    //We need three constants per account type
-    private final double fee = 25 ;
-    private final double waiver = 1500 ;
-    private final double interest = .0005 ;
-    private final int months = 12;
+    private boolean directDeposit;
 
+    // We need three constants per account type
+    private final double fee = 25;
+    private final double waiver = 1500;
+    private final double interest = .0005;
+    private final int months = 12;
 
     /**
      * 
      * Method to return the Checking-Specific direct deposit status.
      * 
-     * @return boolean containing True if the account has direct deposit, false otherwise.
+     * @return boolean containing True if the account has direct deposit, false
+     *         otherwise.
      * 
      */
     public boolean getDirectDeposit() {
-        return directDeposit ;
+        return directDeposit;
     }
-
 
     /**
      * 
-     * Method to set the Checking-Specific direct deposit status of a checking account.
+     * Method to set the Checking-Specific direct deposit status of a checking
+     * account.
      * 
-     * @param b Boolean to determine whether or not the account is a direct deposit or not.
+     * @param b Boolean to determine whether or not the account is a direct deposit
+     *          or not.
      * 
      */
     public void setDirectDeposit(boolean b) {
-        directDeposit = b ;
+        directDeposit = b;
     }
 
     /**
@@ -49,7 +50,7 @@ public class Checking extends Account {
      */
     public double monthlyInterest() {
 
-        return ((interest/months) * getBalance());
+        return ((interest / months) * getBalance());
 
     }
 
@@ -61,9 +62,9 @@ public class Checking extends Account {
      * 
      */
     public double monthlyFee() {
-        if(getDirectDeposit() == true || getBalance() >= waiver){
+        if (getDirectDeposit() == true || getBalance() >= waiver) {
             return 0;
-        }else{
+        } else {
             return fee;
         }
 
@@ -77,18 +78,15 @@ public class Checking extends Account {
      * 
      */
     public String specialString() {
-          
-        if(directDeposit){
+
+        if (directDeposit) {
 
             return "direct deposit account*";
-        
+
         }
 
-        return "" ;
+        return "";
+
+    }
 
 }
-
-}
-
-    
-

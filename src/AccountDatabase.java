@@ -1,15 +1,15 @@
 /**
- * This is an array-based container class with an initial capacity of 5. 
- * It will automatically grow the capacity by 5 if the database is full.
+ * This is an array-based container class with an initial capacity of 5. It will
+ * automatically grow the capacity by 5 if the database is full.
  * 
  * @author Aarif Razak ahr58, Julian Lee jl2203
  *
  */
 
 public class AccountDatabase {
-    
-    private Account[] accounts ;
-    private int size ;
+
+    private Account[] accounts;
+    private int size;
 
     /**
      * 
@@ -17,49 +17,46 @@ public class AccountDatabase {
      * 
      */
     public AccountDatabase() {
-        accounts = new Account[5] ;
-        size = 0 ;
+        accounts = new Account[5];
+        size = 0;
     }
 
-    
     /**
      * 
      * Method to find if any account is present in an Account Database.
      * 
      * @param account Account to find.
-     * @return an int indicating the index inside the AccountDatabase where the account is located.
+     * @return an int indicating the index inside the AccountDatabase where the
+     *         account is located.
      */
     private int find(Account account) {
-        //Search through dataase and return respective index of account
-        for(int i =0; i < accounts.length - 1; i++){
+        // Search through dataase and return respective index of account
+        for (int i = 0; i < accounts.length - 1; i++) {
 
             if (accounts[i] == null) {
 
-                continue ;
+                continue;
 
             }
 
-            if(account.getHolder().getFirstName().equals(accounts[i].getHolder().getFirstName())){
-                if(account.getHolder().getLastName().equals(accounts[i].getHolder().getLastName())){
-                    
+            if (account.getHolder().getFirstName().equals(accounts[i].getHolder().getFirstName())) {
+                if (account.getHolder().getLastName().equals(accounts[i].getHolder().getLastName())) {
 
-                    String str = account.getClass().getName();    
+                    String str = account.getClass().getName();
 
-                    //if they match the account type
-                    if(str.equals(accounts[i].getClass().getName())){
+                    // if they match the account type
+                    if (str.equals(accounts[i].getClass().getName())) {
                         return i;
-                    
+
+                    }
                 }
-            }
-               
 
             }
         }
 
-        return -1 ;
+        return -1;
 
     }
-
 
     /**
      * 
@@ -68,22 +65,20 @@ public class AccountDatabase {
      */
     private void grow() {
 
-
         final int increment = 5;
-        
-        
-        Account[] newAccounts = new Account[accounts.length + increment] ;
 
-        for (int i = 0 ; i < size ; i++) {
+        Account[] newAccounts = new Account[accounts.length + increment];
 
-            newAccounts[i] = accounts[i] ;
+        for (int i = 0; i < size; i++) {
+
+            newAccounts[i] = accounts[i];
 
         }
 
-        accounts = newAccounts ;
+        accounts = newAccounts;
 
     }
-    
+
     /**
      * 
      * Method to add an account to the Account Database specified.
@@ -92,27 +87,27 @@ public class AccountDatabase {
      * @return True if the account was added successfully or false if it wasn't.
      */
     public boolean add(Account account) {
-        //Check Capacity and grow if needed
+        // Check Capacity and grow if needed
         int index = find(account);
-        //if Account already exists
-        if(index != -1){
+        // if Account already exists
+        if (index != -1) {
             return false;
         }
-        
-        if(size == accounts.length){
+
+        if (size == accounts.length) {
             grow();
         }
-        
-        for(int i = 0; i < accounts.length; i++){
-            if(accounts[i] == null){
+
+        for (int i = 0; i < accounts.length; i++) {
+            if (accounts[i] == null) {
                 accounts[i] = account;
-                break ;
+                break;
             }
         }
 
-        size++ ;
-        
-        return true ;
+        size++;
+
+        return true;
 
     }
 
@@ -125,108 +120,109 @@ public class AccountDatabase {
      */
     public boolean remove(Account account) {
 
-        int index = find(account) ;
+        int index = find(account);
 
         if (index == -1) { // Account doesn't exist
 
-            return false ;
+            return false;
 
         }
-        
-        accounts[index] = null ; //will need to add nullcheck in the print
 
-        size-- ;
+        accounts[index] = null; // will need to add nullcheck in the print
 
-        return true ;
+        size--;
+
+        return true;
 
     }
 
     /**
      * 
-     * Method to deposit a set amount of money into a specific account found in the Account Database.
+     * Method to deposit a set amount of money into a specific account found in the
+     * Account Database.
      * 
      * @param account Account to find.
-     * @param amount Amount to deposit.
+     * @param amount  Amount to deposit.
      * @return True if the amount was deposited successfully, false otherwise.
      */
     public boolean deposit(Account account, double amount) {
         // find + credit
 
-        int index = find(account) ;
+        int index = find(account);
 
         if (index == -1) { // If account doeesn't exist
 
-           return false ;
+            return false;
 
         }
 
-        accounts[index].credit(amount) ;
+        accounts[index].credit(amount);
 
-        return true ;
-
+        return true;
 
     }
 
     /**
      * 
-     * Method to withdraw a set amount of moeny from a specific account inside the Account Database.
+     * Method to withdraw a set amount of moeny from a specific account inside the
+     * Account Database.
      * 
      * @param account Account to withdraw from.
-     * @param amount Amount to withdraw from the account.
-     * @return Returns an integer code, -1 if the account wasn't found in the database, 1 if there was insufficent funds, or 0 for a successful transaction.
+     * @param amount  Amount to withdraw from the account.
+     * @return Returns an integer code, -1 if the account wasn't found in the
+     *         database, 1 if there was insufficent funds, or 0 for a successful
+     *         transaction.
      */
     public int withdrawal(Account account, double amount) {
-        
 
-        int index = find(account) ;
+        int index = find(account);
 
         if (index == -1) { // If account doesn't exist
 
-            return -1 ;
+            return -1;
 
         }
 
         if (accounts[index].getBalance() - amount <= 0) { // Insufficient funds
 
-            return 1 ;
+            return 1;
 
         }
 
-        accounts[index].debit(amount) ; // Transaction successful
+        accounts[index].debit(amount); // Transaction successful
 
-        return 0 ;
-
+        return 0;
 
     }
 
-
     /**
      * 
-     * Method to sort the given Account Database based on the open dates of accounts.
+     * Method to sort the given Account Database based on the open dates of
+     * accounts.
      * 
      */
     private void sortByDateOpen() {
 
         Account temp;
-       
-        for(int i = 0; i < size-1; i ++){
+
+        for (int i = 0; i < size - 1; i++) {
             if (accounts[i] == null) {
 
-                continue ;
+                continue;
 
             }
 
-            for(int j = i+1; j < size; j++){
+            for (int j = i + 1; j < size; j++) {
 
                 if (accounts[j] == null) {
 
-                    continue ;
+                    continue;
 
                 }
 
-                if( accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1){ //compares i to j
-                   
-                    temp= accounts[i];
+                if (accounts[i].getOpenDate().compareTo(accounts[j].getOpenDate()) == 1) { // compares i to j
+
+                    temp = accounts[i];
                     accounts[i] = accounts[j];
                     accounts[j] = temp;
                 }
@@ -234,95 +230,94 @@ public class AccountDatabase {
             }
         }
 
-
     }
 
     /**
      * 
-     * Method to sort the given Account Database based on the last name of account holders.
+     * Method to sort the given Account Database based on the last name of account
+     * holders.
      * 
      */
     private void sortByLastName() {
 
         Account temp;
 
-        for(int i =0; i < size - 1; i ++){
+        for (int i = 0; i < size - 1; i++) {
             if (accounts[i] == null) {
 
-                continue ;
+                continue;
 
             }
 
-            for(int k = i +1; k < size; k++){
+            for (int k = i + 1; k < size; k++) {
                 if (accounts[k] == null) {
 
-                    continue ;
-    
+                    continue;
+
                 }
-                if(accounts[i].getHolder().getLastName().compareToIgnoreCase(accounts[k].getHolder().getLastName()) > 0){
+                if (accounts[i].getHolder().getLastName()
+                        .compareToIgnoreCase(accounts[k].getHolder().getLastName()) > 0) {
                     temp = accounts[i];
                     accounts[i] = accounts[k];
                     accounts[k] = temp;
                 }
             }
         }
-        
-        
 
     }
 
     /**
      * 
-     * Method to print the given Account Database based on the open dates of accounts.
+     * Method to print the given Account Database based on the open dates of
+     * accounts.
      * 
      */
     public void printByDateOpen() {
-        
+
         sortByDateOpen();
 
-        for(int i = 0; i < accounts.length; i ++){
+        for (int i = 0; i < accounts.length; i++) {
             if (accounts[i] == null) {
 
-                continue ;
+                continue;
 
             }
 
-            System.out.println(accounts[i].toString()) ;
-            double interest = accounts[i].monthlyInterest() ;
-            System.out.println("-interest: $ " + String.format("%,.2f", interest)) ;
-            double fee = accounts[i].monthlyFee() ;
+            System.out.println(accounts[i].toString());
+            double interest = accounts[i].monthlyInterest();
+            System.out.println("-interest: $ " + String.format("%,.2f", interest));
+            double fee = accounts[i].monthlyFee();
             System.out.println("-fee: $ " + String.format("%,.2f", fee));
-            accounts[i].setBalance(accounts[i].getBalance() + interest - fee) ;
-            System.out.println("-new balance: $ " + String.format("%,.2f", accounts[i].getBalance())) ;
+            accounts[i].setBalance(accounts[i].getBalance() + interest - fee);
+            System.out.println("-new balance: $ " + String.format("%,.2f", accounts[i].getBalance()));
 
         }
-
-
 
     }
 
     /**
      * 
-     * Method to print the given Account Database based on the last names of account holders.
+     * Method to print the given Account Database based on the last names of account
+     * holders.
      * 
      */
     public void printByLastName() {
 
         sortByLastName();
 
-        for(int i =0; i < accounts.length; i ++){
+        for (int i = 0; i < accounts.length; i++) {
             if (accounts[i] == null) {
 
-                continue ;
+                continue;
 
             }
-            System.out.println(accounts[i].toString()) ;
-            double interest = accounts[i].monthlyInterest() ;
-            System.out.println("-interest: $ " + String.format("%,.2f", interest)) ;
-            double fee = accounts[i].monthlyFee() ;
+            System.out.println(accounts[i].toString());
+            double interest = accounts[i].monthlyInterest();
+            System.out.println("-interest: $ " + String.format("%,.2f", interest));
+            double fee = accounts[i].monthlyFee();
             System.out.println("-fee: $ " + String.format("%,.2f", fee));
-            accounts[i].setBalance(accounts[i].getBalance() + interest - fee) ;
-            System.out.println("-new balance: $ " + String.format("%,.2f", accounts[i].getBalance())) ;
+            accounts[i].setBalance(accounts[i].getBalance() + interest - fee);
+            System.out.println("-new balance: $ " + String.format("%,.2f", accounts[i].getBalance()));
         }
 
     }
@@ -334,13 +329,12 @@ public class AccountDatabase {
      */
     public void printAccounts() {
 
-        for(int i = 0; i < size; i ++){
-            if(accounts[i] == null){
+        for (int i = 0; i < size; i++) {
+            if (accounts[i] == null) {
                 continue;
             }
             System.out.println(accounts[i].toString());
         }
-        
 
     }
 
@@ -350,7 +344,7 @@ public class AccountDatabase {
      * 
      * @return int of the current Account Database size.
      */
-    public int getSize(){
+    public int getSize() {
         return this.size;
     }
 
@@ -360,11 +354,10 @@ public class AccountDatabase {
      * 
      * @return an Account[] of accounts inside any set Database.
      */
-    public Account[] getAccounts(){
+    public Account[] getAccounts() {
         return this.accounts;
     }
 
-    
     /**
      * 
      * Helper method for incrementing withdrawals inside any MoneyMarket account.
@@ -373,12 +366,12 @@ public class AccountDatabase {
      */
     public void incrementWithdrawals(MoneyMarket m) {
 
-        int index = find(m) ;
+        int index = find(m);
 
-        MoneyMarket temp = (MoneyMarket)accounts[index] ;
-        temp.setWithdrawals(temp.getWithdrawals()+ 1);
-        accounts[index] = temp ;
+        MoneyMarket temp = (MoneyMarket) accounts[index];
+        temp.setWithdrawals(temp.getWithdrawals() + 1);
+        accounts[index] = temp;
 
     }
-    
+
 }
