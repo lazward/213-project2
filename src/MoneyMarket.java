@@ -16,6 +16,9 @@ public class MoneyMarket extends Account {
     private final double interest = .0065;
     private final int months = 12;
 
+    private final int voidWaiver = 6;
+    private final int singular = 1;
+
     /**
      * 
      * Helper method to return the number of withdrawals for any given MoneyMarket
@@ -62,7 +65,7 @@ public class MoneyMarket extends Account {
      */
     public double monthlyFee() {
 
-        if (withdrawals <= 6 && getBalance() >= waiver) {
+        if (withdrawals <= voidWaiver && getBalance() >= waiver) {
             return 0;
         } else {
             return fee;
@@ -79,7 +82,7 @@ public class MoneyMarket extends Account {
      */
     public String specialString() {
 
-        if (withdrawals == 1) {
+        if (withdrawals == singular) {
 
             return "1 withdrawal*";
 
