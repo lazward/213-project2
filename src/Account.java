@@ -42,7 +42,7 @@ public abstract class Account {
     public String toString() {
         
         return "*" + this.getClass().getName() + "*" + holder.getFirstName() + " " + holder.getLastName() + "* $"
-                + String.format("%.2f", balance) + "*" + dateOpen.toString() + "*" + specialString();
+                + String.format("%,.2f", balance) + "*" + dateOpen.toString() + "*" + specialString();
 
     }
 

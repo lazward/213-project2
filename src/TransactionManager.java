@@ -228,7 +228,7 @@ public class TransactionManager {
 
                             if (database.deposit(checking, deposit)) {
 
-                                System.out.println(String.format("%.2f", deposit) + " deposited to account.");
+                                System.out.println(String.format("%,.2f", deposit) + " deposited to account.");
 
                             } else {
 
@@ -242,7 +242,7 @@ public class TransactionManager {
 
                             if (database.deposit(savings, deposit)) {
 
-                                System.out.println(String.format("%.2f", deposit) + " deposited to account.");
+                                System.out.println(String.format("%,.2f", deposit) + " deposited to account.");
 
                             } else {
 
@@ -256,7 +256,7 @@ public class TransactionManager {
 
                             if (database.deposit(moneyMarket, deposit)) {
 
-                                System.out.println(String.format("%.2f", deposit) + " deposited to account.");
+                                System.out.println(String.format("%,.2f", deposit) + " deposited to account.");
 
                             } else {
 
@@ -303,7 +303,7 @@ public class TransactionManager {
 
                             if (result == 0) {
 
-                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn account.");
+                                System.out.println(String.format("%,.2f", withdrawal) + " withdrawn account.");
 
                             } else if (result == 1) {
 
@@ -325,7 +325,7 @@ public class TransactionManager {
 
                             if (result == 0) {
 
-                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn account.");
+                                System.out.println(String.format("%,.2f", withdrawal) + " withdrawn account.");
 
                             } else if (result == 1) {
 
@@ -349,7 +349,7 @@ public class TransactionManager {
                             if (result == 0) {
 
                                 database.incrementWithdrawals(moneyMarket);
-                                System.out.println(String.format("%.2f", withdrawal) + " withdrawn from account.");
+                                System.out.println(String.format("%,.2f", withdrawal) + " withdrawn from account.");
 
                             } else if (result == 1) {
 

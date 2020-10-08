@@ -289,11 +289,11 @@ public class AccountDatabase {
 
             System.out.println(accounts[i].toString()) ;
             double interest = accounts[i].monthlyInterest() ;
-            System.out.println("-interest: $ " + String.format("%.2f", interest)) ;
+            System.out.println("-interest: $ " + String.format("%,.2f", interest)) ;
             double fee = accounts[i].monthlyFee() ;
-            System.out.println("-fee: $ " + String.format("%.2f", fee));
+            System.out.println("-fee: $ " + String.format("%,.2f", fee));
             accounts[i].setBalance(accounts[i].getBalance() + interest - fee) ;
-            System.out.println("-new balance: $ " + String.format("%.2f", accounts[i].getBalance())) ;
+            System.out.println("-new balance: $ " + String.format("%,.2f", accounts[i].getBalance())) ;
 
         }
 
@@ -318,11 +318,11 @@ public class AccountDatabase {
             }
             System.out.println(accounts[i].toString()) ;
             double interest = accounts[i].monthlyInterest() ;
-            System.out.println("-interest: $ " + String.format("%.2f", interest)) ;
+            System.out.println("-interest: $ " + String.format("%,.2f", interest)) ;
             double fee = accounts[i].monthlyFee() ;
-            System.out.println("-fee: $ " + String.format("%.2f", fee));
+            System.out.println("-fee: $ " + String.format("%,.2f", fee));
             accounts[i].setBalance(accounts[i].getBalance() + interest - fee) ;
-            System.out.println("-new balance: $ " + String.format("%.2f", accounts[i].getBalance())) ;
+            System.out.println("-new balance: $ " + String.format("%,.2f", accounts[i].getBalance())) ;
         }
 
     }
